@@ -1,2 +1,2 @@
 # leet_dsa
-Collection of LeetCode questions to ace the coding interview! - Created using [LeetHub](https://github.com/QasimWani/LeetHub).
+DSA questions and notes (in form of comments in code)
