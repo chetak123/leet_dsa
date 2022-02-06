@@ -6,7 +6,26 @@
 
 class Solution:
     def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
-        """
+        if headA is None or headB is None:
+            return None
+
+        pa = headA # 2 pointers
+        pb = headB
+
+        while pa is not pb:
+            # if either pointer hits the end, switch head and continue the second traversal, 
+            # if not hit the end, just move on to next
+            pa = headB if pa is None else pa.next # this is used to concatinate A+B
+            pb = headA if pb is None else pb.next # and B+A thus solving the problem
+                                                  # of uneven lengths
+        return pa # only 2 ways to get out of the loop, they meet or the both hit the end=None
+
+# the idea is if you switch head, the possible difference between length would be countered. 
+# On the second traversal, they either hit or miss. 
+# if they meet, pa or pb would be the node we are looking for, 
+# if they didn't meet, they will hit the end at the same iteration, pa == pb == None, return either one of them is the same,None            
+            
+"""
         l1,l2=headA,headB
         c1,c2=self.count(l1,l2)
         
@@ -44,6 +63,9 @@ class Solution:
             l2=l2.next
         return(c1,c2)
 """
+        
+        
+"""
         curA,curB = headA,headB
         lenA,lenB = 0,0
         while curA is not None:
@@ -63,4 +85,6 @@ class Solution:
             curB = curB.next
             curA = curA.next
         return curA
-        
+"""
+
+
