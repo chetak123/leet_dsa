@@ -6,10 +6,12 @@ class Solution {
         //creating a min heap of k elements 
         // here the root element will be the kth largest element 
         for (int i=0;i<k;i++){
+            
             pq.add(nums[i]);
             
         }
         for (int i=k;i<nums.length;i++){
+            
             if (pq.peek()<nums[i]){ // to check if the first element of queue 
                 // is less than arr element, min heap root element
                 
