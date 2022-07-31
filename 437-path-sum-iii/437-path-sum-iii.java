@@ -1,7 +1,7 @@
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
- *     long val;
+ *     int val;
  *     TreeNode left;
  *     TreeNode right;
  *     TreeNode() {}
@@ -14,53 +14,31 @@
  * }
  */
 class Solution {
-    int cnt = 0;
     public int pathSum(TreeNode root, int targetSum) {
-        pathSumOf(root, targetSum);
         if(root == null || root.val == 1000000000)
         {
             return 0;
         }
-        return cnt;
-    }
-    public int[] pathSumOf(TreeNode root, int TargetSum)
-    {
-        if(root == null)
-        {
-            return new int[0];
-        }else
-        {
-            int[] arrLeft = pathSumOf(root.left, TargetSum);
-            int[] arrRight = pathSumOf(root.right, TargetSum);
-            int[] arr = new int[arrRight.length + arrLeft.length + 1];
-            int tem;
-            int val = root.val;
-            if(val == TargetSum)
-            {
-                cnt++;
-            }
-            int leftLen = arrLeft.length;
-            for(int i = 0; i < leftLen; i++)
-            {
-                tem = arrLeft[i] + val;
-                if(tem == TargetSum)
-                {
-                    cnt++;
-                }
-                arr[i] = tem;
-            }
-            for(int i = 0; i < arrRight.length; i++)
-            {
-                tem = arrRight[i] + val;
-                if(tem == TargetSum)
-                {
-                    cnt++;
-                }
-                arr[i + leftLen] = tem;
-            }
-            arr[arr.length - 1] = val;
-            return arr;
-        }
-    }
 
+        int root_sum = countAll( root, targetSum); // to check all
+        // nodes including that root node
+        
+        int left = pathSum( root.left,targetSum); //to check all nodes
+        // from left side of root node (like from 5 to 3)
+        
+        int right = pathSum(root.right,targetSum);
+        return (root_sum+right+left);
+    }
+    public int countAll(TreeNode root,long targetSum){
+        if (root==null){
+            return 0;
+        }
+        int ans = 0;
+        if (targetSum-root.val==0){
+            ans++;
+        }
+        ans = ans+countAll(root.left,targetSum-root.val);
+        ans = ans + countAll(root.right,targetSum-root.val);
+        return ans;
+    }
 }
